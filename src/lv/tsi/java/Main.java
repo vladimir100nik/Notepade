@@ -26,21 +26,39 @@ public class Main {
                     break;
                 case "delete":
                     delete();
+                    break;
+                case "help":
+                    help();
+                    break;
                 default:
                     System.out.println("It isn'n a command");
             }
         }
     }
 
-    private static void delete() {
-        System.out.println("Enter ID");
-        int  = scanner.nextInt();
-        for (int i = 0; i < person.size(); i++) {
-
-        }
+    private static void help() {
+        System.out.println("Menu:\n" +
+                "create - enter new person\n" +
+                "list - show person list\n" +
+                "delete - remove person\n" +
+                "exit - close program\n" +
+                "help - command list");
 
 
     }
+
+    private static void delete() {
+        System.out.println("Enter ID");
+        int del = scanner.nextInt();
+
+        for (int i = del; i <= person.size(); i++) {
+
+                   person.remove(del-1);
+
+        }
+
+    }
+
 
     private static void create() {
 
@@ -53,11 +71,12 @@ public class Main {
 
         System.out.println("Enter phone");
         String phone = scanner.next();
-
+        if(phone.length();
         Person r = new Person();
         r.setName(name);
         r.setSurname(surname);
         r.setPhone(phone);
+
         person.add(r);
         System.out.println(r);
 

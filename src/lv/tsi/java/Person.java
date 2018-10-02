@@ -7,6 +7,23 @@ public class Person {
     private String surname;
     private String phone;
 
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Person.count = count;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private  String email;
     public Person()
 
     {

@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("Enter command");
+            System.out.println("Enter command ('Help' for help):");
             String cmd = scanner.next();
             switch (cmd) {
                 case "create":
@@ -49,14 +49,20 @@ public class Main {
 
     private static void delete() {
         System.out.println("Enter ID");
-        int del = scanner.nextInt();
-
-        for (int i = del; i <= person.size(); i++) {
-
-                   person.remove(del-1);
-
+        int id = scanner.nextInt();
+        for (int i = 0; i < person.size(); i++) {
+            Person p = person.get(i);
+            if (id == p.getId()) {
+                person.remove(i);
+                break;
+            }
+//
+//            for (Person p:person){
+//                if (id==p.getId()){                       //not optimal
+//                    person.remove(p);
+//                    break;
+//                }
         }
-
     }
 
 
@@ -64,22 +70,43 @@ public class Main {
 
 
         System.out.println("Enter name");
-        String name = scanner.next();
+        String name = askString();
 
         System.out.println("Enter surname");
-        String surname = scanner.next();
+        String surname = askString();
 
         System.out.println("Enter phone");
-        String phone = scanner.next();
-        if(phone.length();
+        String phone = askString();
+        System.out.println("Enter email");
+        String email = askString();
         Person r = new Person();
         r.setName(name);
         r.setSurname(surname);
         r.setPhone(phone);
+        r.setEmail(email);
 
         person.add(r);
         System.out.println(r);
 
+
+    }
+
+    private static String askString() {
+
+        var result = new ArrayList<String>();
+        var word = scanner.next();
+        if (word.startsWith("\"")) {
+            do {
+                result.add(word);
+                if (word.endsWith("\"")) {
+                    String join = String.join(" ", result);
+                    return join.substring(1, join.length() - 1);
+                }
+                word = scanner.next();
+            } while (true);
+        } else {
+            return word;
+        }
 
     }
 

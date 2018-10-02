@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.sun.tools.attach.VirtualMachine.list;
-
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static List<Person> person = new ArrayList<>();
+    static List<Record> recordList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -16,8 +14,11 @@ public class Main {
             System.out.println("Enter command ('Help' for help):");
             String cmd = scanner.next();
             switch (cmd) {
-                case "create":
+                case "cp":
                     create();
+                    break;
+                case "ct":
+                    ct();
                     break;
                 case "exit":
                     return;
@@ -26,6 +27,9 @@ public class Main {
                     break;
                 case "delete":
                     delete();
+                    break;
+                case "find":
+                    find();
                     break;
                 case "help":
                     help();
@@ -36,11 +40,32 @@ public class Main {
         }
     }
 
+    private static void find() {
+        System.out.println("Find what?");
+        String str = askString();
+        for (Record r : recordList) {
+            if (r.hasSubstring(str)) {
+                System.out.println(r);
+            }
+        }
+
+
+    }
+
+    private static void ct() {
+        System.out.println("Enter your text");
+        String text = askString();
+        Note note = new Note();
+        note.setText(text);
+        recordList.add(note);
+        System.out.println(note);
+    }
+
     private static void help() {
         System.out.println("Menu:\n" +
-                "create - enter new person\n" +
-                "list - show person list\n" +
-                "delete - remove person\n" +
+                "create - enter new recordList\n" +
+                "list - show recordList list\n" +
+                "delete - remove recordList\n" +
                 "exit - close program\n" +
                 "help - command list");
 
@@ -50,16 +75,16 @@ public class Main {
     private static void delete() {
         System.out.println("Enter ID");
         int id = scanner.nextInt();
-        for (int i = 0; i < person.size(); i++) {
-            Person p = person.get(i);
+        for (int i = 0; i < recordList.size(); i++) {
+            Record p = recordList.get(i);
             if (id == p.getId()) {
-                person.remove(i);
+                recordList.remove(i);
                 break;
             }
 //
-//            for (Person p:person){
+//            for (Person p:recordList){
 //                if (id==p.getId()){                       //not optimal
-//                    person.remove(p);
+//                    recordList.remove(p);
 //                    break;
 //                }
         }
@@ -85,7 +110,7 @@ public class Main {
         r.setPhone(phone);
         r.setEmail(email);
 
-        person.add(r);
+        recordList.add(r);
         System.out.println(r);
 
 
@@ -112,7 +137,7 @@ public class Main {
 
     private static void list() {
 
-        for (Person r : person) {
+        for (Record r : recordList) {
             System.out.println(r);
         }
 

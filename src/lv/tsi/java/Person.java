@@ -1,19 +1,10 @@
 package lv.tsi.java;
 
-public class Person {
-    private  static int count = 0;
-    private int id;
+public class Person extends Record {                //extends- наследует с Record
     private String name;
     private String surname;
     private String phone;
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        Person.count = count;
-    }
+    private String email;
 
     public String getEmail() {
         return email;
@@ -21,22 +12,6 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    private  String email;
-    public Person()
-
-    {
-       count++;
-       id = count;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -67,10 +42,19 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                '}' + count;
+                '}';
+    }
+
+    @Override
+    public boolean hasSubstring(String str) {
+        return name.contains(str)
+                || surname.contains(str)
+                || phone.contains(str)
+                || email.contains(str);
+
     }
 }

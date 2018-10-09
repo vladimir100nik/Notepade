@@ -27,7 +27,7 @@ public class Note extends Record {
 
     @Override
     public void askQuestions() {
-        System.out.println("Enter your text");
+        System.out.println("Enter reminder text");
         text = Main.askString();
     }
 }

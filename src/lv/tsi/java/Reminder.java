@@ -1,30 +1,43 @@
 package lv.tsi.java;
 
-public class Reminder extends Note {
-    private String date;
-    private String time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+public class Reminder extends Note {
+    private LocalDate date;
+    private LocalTime time;
+
+    @Override
+    public void askQuestions() {
+        super.askQuestions();
+        System.out.println("Enter reminder date");
+        date = Main.askDate();
+        System.out.println("Enter reminder time");
+        time = Main.askTime();
+
+
+    }
 
     @Override
     public boolean hasSubstring(String str) {
         return super.hasSubstring(str)
-                || date.contains(str)
-                || time.contains(str);
+                || date.format(Main.DATE_FORMATTER).contains(str)
+                || time.format(Main.TIME_FORMATTER).contains(str);
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -33,8 +46,8 @@ public class Reminder extends Note {
         return "Reminder{" +
                 "id=" + getId() + "," +
                 "text='" + getText() + '\'' +
-                "date='" + date + '\'' +
-                ", time='" + time + '\'' +
+                "date='" + date.format(Main.DATE_FORMATTER) + '\'' +
+                ", time='" + time.format(Main.TIME_FORMATTER) + '\'' +
                 '}';
     }
 }

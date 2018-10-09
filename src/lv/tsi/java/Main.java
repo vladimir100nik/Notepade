@@ -1,10 +1,17 @@
 package lv.tsi.java;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public final static String TIME = "HH:mm";
+    public final static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME);
+    public final static String DATE_FORMAT = "dd.MM.yyyy";
+    public final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     static Scanner scanner = new Scanner(System.in);
     static List<Record> recordList = new ArrayList<>();
 
@@ -44,21 +51,17 @@ public class Main {
     }
 
     private static void createReminder() {
-        System.out.println("Enter reminder text");
-        String text = askString();
-        System.out.println("Enter reminder date");
-        String date = askString();
-        System.out.println("Enter reminder time");
-        String time = askString();
+
 
         var reminder = new Reminder();
-        reminder.setText(text);
-        reminder.setDate(date);
-        reminder.setTime(time);
+        addRecord(reminder);
 
+    }
+
+    private static void addRecord(Record reminder) {
+        reminder.askQuestions();
         System.out.println(reminder);
         recordList.add(reminder);
-
     }
 
     private static void find() {
@@ -76,9 +79,7 @@ public class Main {
     private static void ct() {
 
         Note note = new Note();
-        note.askQuestions();
-        recordList.add(note);
-        System.out.println(note);
+        addRecord(note);
     }
 
     private static void help() {
@@ -115,11 +116,7 @@ public class Main {
     public static void create() {
 
         Person r = new Person();
-        r.askQuestions();
-        recordList.add(r);
-        System.out.println(r);
-
-
+        addRecord(r);
     }
 
     public static String askString() {
@@ -148,5 +145,16 @@ public class Main {
         }
 
 
+    }
+
+    public static LocalDate askDate() {
+        String d = askString();
+        LocalDate date = LocalDate.parse(d, DATE_FORMATTER);
+        return date;
+    }
+    public static LocalTime askTime(){
+        String t = askString();
+        LocalTime time = LocalTime.parse(t, TIME_FORMATTER);
+        return time;
     }
 }

@@ -34,10 +34,31 @@ public class Main {
                 case "help":
                     help();
                     break;
+                case "rem":
+                    createReminder();
+                    break;
                 default:
                     System.out.println("It isn'n a command");
             }
         }
+    }
+
+    private static void createReminder() {
+        System.out.println("Enter reminder text");
+        String text = askString();
+        System.out.println("Enter reminder date");
+        String date = askString();
+        System.out.println("Enter reminder time");
+        String time = askString();
+
+        var reminder = new Reminder();
+        reminder.setText(text);
+        reminder.setDate(date);
+        reminder.setTime(time);
+
+        System.out.println(reminder);
+        recordList.add(reminder);
+
     }
 
     private static void find() {
@@ -53,10 +74,9 @@ public class Main {
     }
 
     private static void ct() {
-        System.out.println("Enter your text");
-        String text = askString();
+
         Note note = new Note();
-        note.setText(text);
+        note.askQuestions();
         recordList.add(note);
         System.out.println(note);
     }
@@ -64,9 +84,10 @@ public class Main {
     private static void help() {
         System.out.println("Menu:\n" +
                 "create - enter new recordList\n" +
-                "list - show recordList list\n" +
-                "delete - remove recordList\n" +
+                "list - show  list\n" +
+                "delete - remove \n" +
                 "exit - close program\n" +
+                "rem - enter reminder\n" +
                 "help - command list");
 
 
@@ -91,32 +112,17 @@ public class Main {
     }
 
 
-    private static void create() {
+    public static void create() {
 
-
-        System.out.println("Enter name");
-        String name = askString();
-
-        System.out.println("Enter surname");
-        String surname = askString();
-
-        System.out.println("Enter phone");
-        String phone = askString();
-        System.out.println("Enter email");
-        String email = askString();
         Person r = new Person();
-        r.setName(name);
-        r.setSurname(surname);
-        r.setPhone(phone);
-        r.setEmail(email);
-
+        r.askQuestions();
         recordList.add(r);
         System.out.println(r);
 
 
     }
 
-    private static String askString() {
+    public static String askString() {
 
         var result = new ArrayList<String>();
         var word = scanner.next();

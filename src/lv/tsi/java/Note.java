@@ -1,6 +1,8 @@
 package lv.tsi.java;
 
+
 public class Note extends Record {
+    private String text;
 
     public String getText() {
         return text;
@@ -10,16 +12,10 @@ public class Note extends Record {
         this.text = text;
     }
 
-    private String text;
-
-    {
-    }
-
-
     @Override
     public String toString() {
         return "Note{" +
-                "id" + getId() + "," +
+                "id=" + getId() + "," +
                 "text='" + text + '\'' +
                 '}';
     }
@@ -27,5 +23,11 @@ public class Note extends Record {
     @Override
     public boolean hasSubstring(String str) {
         return text.contains(str);
+    }
+
+    @Override
+    public void askQuestions() {
+        System.out.println("Enter your text");
+        text = Main.askString();
     }
 }
